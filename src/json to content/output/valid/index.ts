@@ -6,6 +6,7 @@ import nestedStructureProperty from './nested-structure-property';
 import nullProperty from './null-property';
 import numberProperty from './number-property';
 import textProperty from './text-property';
+import plansCards from './plans-cards';
 
 export default {
   booleanProperty,
@@ -16,4 +17,5 @@ export default {
   nullProperty,
   numberProperty,
   textProperty,
+  plansCards,
 };

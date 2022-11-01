@@ -7,6 +7,7 @@ import nullProperty from './null-property';
 import numberProperty from './number-property';
 import textProperty from './text-property';
 import primitiveRoot from './primitive-root';
+import plansCards from './plans-cards';
 
 export default {
   booleanProperty,
@@ -18,4 +19,5 @@ export default {
   numberProperty,
   textProperty,
   primitiveRoot,
+  plansCards,
 };

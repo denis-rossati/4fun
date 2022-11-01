@@ -1,8 +1,12 @@
+import JsonSpitter from './helpers/JsonSpitter';
+
 type StackValue = (string)[];
 type NodeValue = string | number | null | Array<NodeValue> | { [key: string]: NodeValue };
 
 export default class ObjectToContent {
   private readonly input: { [key: string]: any } = {};
+
+  private output: { [key: string]: any } | undefined;
 
   private stack: StackValue = [];
 
@@ -48,13 +52,28 @@ export default class ObjectToContent {
         }
       }
 
-      return {
+      const result = {
         type: 'structure',
         attributes: output,
       };
+
+      this.setOutput(result);
+
+      return result;
     }
 
     return ObjectToContent.parseValue(input);
+  }
+
+  public toJson() {
+    const output = this.getOutput();
+
+    if (output !== undefined) {
+      JsonSpitter.spit(output)
+        .then();
+    } else {
+      throw new Error('First you need to parse a object.');
+    }
   }
 
   private static getVarType(variable: any) {
@@ -126,10 +145,12 @@ export default class ObjectToContent {
 
     Object.keys(value)
       .forEach((key) => {
-        const nestedClass = new ObjectToContent(JSON.stringify(value[key]));
+        if (value[key] !== null) {
+          const nestedClass = new ObjectToContent(JSON.stringify(value[key]));
 
-        // @ts-ignore
-        structure.attributes[key] = nestedClass.parse();
+          // @ts-ignore -> there's no string indexing empty objects.
+          structure.attributes[key] = nestedClass.parse();
+        }
       });
 
     return structure;
@@ -149,6 +170,14 @@ export default class ObjectToContent {
 
   private static parseNull() {
     return null;
+  }
+
+  private setOutput(output: { [key: string]: any }) {
+    this.output = output;
+  }
+
+  private getOutput() {
+    return this.output;
   }
 
   private getInput() {

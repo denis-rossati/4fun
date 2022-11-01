@@ -40,78 +40,25 @@ describe('The JsonToContent class', () => {
       const jsonOutput = expected;
 
       const parser = new ObjectToContent(jsonInput);
-      const x = parser.parse();
 
-      console.log('hei', x.attributes);
-
-      expect(x)
+      expect(parser.parse())
         .toStrictEqual(jsonOutput);
     });
 
-    /*
-    it('should parse a textual property', () => {
-      const jsonInput = JSON.stringify(input.textProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.textProperty);
-    });
-
-    it('should parse number property', () => {
-      const jsonInput = JSON.stringify(input.numberProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.numberProperty);
-    });
-
-    it('should not parse a null property', () => {
-      const jsonInput = JSON.stringify(input.nullProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.nullProperty);
-    });
-
-    it('should parse a boolean property', () => {
-      const jsonInput = JSON.stringify(input.booleanProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.booleanProperty);
-    });
-
-    it('should parse a empty structure property', () => {
-      const jsonInput = JSON.stringify(input.emptyStructureProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.emptyStructureProperty);
-    });
-
-    it('should parse a empty list property', () => {
-      const jsonInput = JSON.stringify(input.emptyListProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.emptyListProperty);
-    });
-
-    it('should parse a nested list property', () => {
-      const jsonInput = JSON.stringify(input.nestedListProperty);
-      const parser = new ObjectToContent(jsonInput);
-
-      expect(parser.parse())
-        .toStrictEqual(output.nestedListProperty);
-    });
-    });
-     */
     it('should parse a nested structure property', () => {
       const jsonInput = JSON.stringify(input.nestedStructureProperty);
       const parser = new ObjectToContent(jsonInput);
 
       expect(parser.parse())
         .toStrictEqual(output.nestedStructureProperty);
+    });
+
+    it('now parse this, sucker', () => {
+      const jsonInput = JSON.stringify(input.plansCards);
+      const parser = new ObjectToContent(jsonInput);
+
+      expect(parser.parse())
+        .toStrictEqual(output.plansCards);
     });
   });
 });
