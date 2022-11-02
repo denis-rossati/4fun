@@ -1,6 +1,6 @@
 import ObjectToContent from '../ObjectToContent';
-import input from '../input';
-import output from '../output';
+import input from './input';
+import output from './output';
 
 describe('The JsonToContent class', () => {
   describe('with a invalid json', () => {
